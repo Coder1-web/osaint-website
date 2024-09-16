@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP Information Finder</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #0f0f0f;
+            color: #00ff00;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin: 20px 0;
+            animation: fadeIn 1s ease-out;
+        }
+
+        #search-container {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #00ff00;
+            background-color: #1e1e1e;
+            color: #00ff00;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: #00ff00;
+            border: none;
+            color: black;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #00cc00;
+        }
+
+        #results {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+
+        #map {
+            width: 100%;
+            height: 400px;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <h1>IP Information Finder</h1>
+    <div id="search-container">
+        <input type="text" id="ipInput" placeholder="Enter IP Address" required>
+        <button id="searchButton">Search</button>
+    </div>
+
+    <div id="results"></div>
+    
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        document.getElementById('searchButton').addEventListener('click', async function() {
+            const ip = document.getElementById('ipInput').value;
+            const resultsDiv = document.getElementById('results');
+            const mapDiv = document.getElementById('map');
+
+            if (!ip) {
+                resultsDiv.innerHTML = '<p>Please enter an IP address.</p>';
+                return;
+            }
+
+            resultsDiv.innerHTML = 'Searching...';
+
+            try {
+                const response = await fetch(`/host_info?ip=${ip}`);
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    if (data.error) {
+                        resultsDiv.innerHTML = `<p>Error: ${data.error}</p>`;
+                    } else {
+                        resultsDiv.innerHTML = `
+                            <h3>Results for IP: ${data.ip}</h3>
+                            <p><strong>Hostname:</strong> ${data.hostname}</p>
+                            <p><strong>City:</strong> ${data.city}</p>
+                            <p><strong>Region:</strong> ${data.region}</p>
+                            <p><strong>Country:</strong> ${data.country}</p>
+                            <p><strong>Location:</strong> ${data.loc}</p>
+                        `;
+
+                        const [lat, lng] = data.loc.split(',');
+                        initializeMap(lat, lng);
+                    }
+                } else {
+                    const text = await response.text();
+                    resultsDiv.innerHTML = `<p>An error occurred: ${text}</p>`;
+                }
+            } catch (error) {
+                resultsDiv.innerHTML = `<p>An error occurred: ${error.message}</p>`;
+            }
+        });
+
+        function initializeMap(lat, lng) {
+            const map = L.map('map').setView([lat, lng], 13);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: 'Map data © OpenStreetMap contributors'
+            }).addTo(map);
+
+            L.marker([lat, lng]).addTo(map)
+                .bindPopup(`Location: ${lat}, ${lng}`)
+                .openPopup();
+        }
+    </script>
+</body>
+</html>

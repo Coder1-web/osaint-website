@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Osint Web Basics</title>
+    <link rel="stylesheet" href="style.css"> <!-- Link to your CSS file -->
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace; /* Match hacker theme */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            min-height: 100vh;
+            background-color: #000;
+            color: #0f0;
+        }
+
+        #sidebar {
+            width: 250px;
+            background-color: #111;
+            padding: 20px;
+            position: fixed;
+            height: 100%;
+            top: 0;
+            left: 0;
+            box-shadow: 2px 0 5px rgba(0, 255, 0, 0.5);
+        }
+
+        #sidebar h2 {
+            color: #0f0;
+            font-size: 1.5em;
+            text-align: center;
+        }
+
+        #sidebar a {
+            display: block;
+            color: #0f0;
+            padding: 10px;
+            text-decoration: none;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        #sidebar a:hover {
+            background-color: #333;
+        }
+
+        #main-content {
+            margin-left: 270px;
+            padding: 20px;
+            flex: 1;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #0f0;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #options-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #options-container button {
+            background-color: #0f0;
+            color: #000;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            margin: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #options-container button:hover {
+            background-color: #00ff00;
+        }
+
+        #info-section {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="sidebar">
+        <h2>OSINT Tools</h2>
+        <a href="/">Home Page</a>
+        <a href="/terminal">Terminal Page</a>
+        <a href="/network_scanner">Network Scanner Page</a>
+        <a href="/vulnerability_scanner">Vulnerability Scanner Page</a>
+        <a href="/password_cracker">Password Cracker Page</a>
+        <a href="/forensics_tools">Forensics Tools</a>
+    </div>    
+    
+    <div id="main-content">
+        <h1>Osint Web Basics</h1>
+        <div id="options-container">
+            <button onclick="location.href='/search_ip'">IP Information Finder</button>
+            <button onclick="location.href='/map'">Map View</button>
+        </div>
+        <div id="info-section">
+            <h2>What is OSINT?</h2>
+            <p>
+                Open-source intelligence (OSINT) is the process of gathering and analyzing publicly available information to assess threats, make decisions or answer specific questions.
+                <br><br>
+                Many organizations use OSINT as a cybersecurity tool to help gauge security risks and identify vulnerabilities in their IT systems. Cybercriminals and hackers also use OSINT techniques for social engineering, phishing and exposing targets for cyberattacks.
+                <br><br>
+                Beyond cybersecurity, other disciplines such as law enforcement, national security, marketing, journalism and academic research may also make use of open-source intelligence.
+            </p>
+            
+            <h2>How OSINT Works</h2>
+            <p>
+                As far back as World War II, highly trained agents in the intelligence community have monitored open-source information such as radio broadcasts, newspapers and market fluctuations. Today, given the number and variety of easily accessible data sources, nearly anyone can participate in open-source intelligence gathering.
+                <br><br>
+                Some of the public sources from which OSINT researchers collect data points include:
+                <ul>
+                    <li>Internet search engines such as Google, DuckDuckGo, Yahoo, Bing and Yandex.</li>
+                    <li>Print and online news media including newspapers, magazines and news sites.</li>
+                    <li>Social media accounts on platforms such as Facebook, X, Instagram and LinkedIn.</li>
+                    <li>Online forums, blogs and Internet Relay Chats (IRC).</li>
+                    <li>The dark web, an encrypted area of the internet that is not indexed by search engines.</li>
+                    <li>Online directories of phone numbers, email addresses and physical addresses.</li>
+                    <li>Public records including births, deaths, court documents and business filings.</li>
+                    <li>Government records such as meeting transcripts, budgets, speeches and press releases issued by local, state and federal/national governments.</li>
+                    <li>Academic research including papers, theses and journals.</li>
+                    <li>Technical data such as IP addresses, APIs, open ports and web page metadata.</li>
+                </ul>
+                <br>
+                However, before data collection from OSINT sources begins, a clear objective should be established. For example, security professionals who use OSINT first determine which insights they seek to uncover, and which public data will yield the desired results.
+                <br><br>
+                After the public information is collected, it must then be processed to filter out unnecessary or redundant data. Security teams can then analyze the refined data and create an actionable intelligence report.
+            </p>
+
+            <h2>How Hackers Use OSINT</h2>
+            <p>
+                Threat actors often use OSINT to uncover sensitive information they can leverage to exploit vulnerabilities in computer networks.
+                <br><br>
+                This may include personal details about an organization’s employees, partners and vendors that are easily accessible on social media and company websites. Or technical information such as credentials, security gaps or encryption keys that may appear in the source code of web pages or cloud applications. There are also public websites that publish compromising information such as stolen logins and passwords from data breaches.
+                <br><br>
+                Cybercriminals are able to use this public data for a variety of nefarious purposes.
+                <br><br>
+                For example, they could use personal information from social networks to create tailored phishing emails that convince readers to click on a malicious link. Or conduct a Google search with specific commands that reveal security weaknesses in a web application, a practice called “Google dorking.” They may also evade detection during a hacking attempt after reviewing a company’s public assets that describe their cybersecurity defense strategies.
+            </p>
+
+            <h2>OSINT for Cybersecurity</h2>
+            <p>
+                For these reasons, many organizations conduct OSINT assessments of the public sources of information related to their systems, applications and human resources.
+                <br><br>
+                The findings can be used to locate unauthorized leaks of proprietary or sensitive data, evaluate information security, and identify vulnerabilities such as unpatched software, misconfigurations or open ports. Organizations may also conduct penetration testing of their systems and networks using the same OSINT data that are publicly accessible by cybercriminals and hackers.
+                <br><br>
+                Often, the information collected during an OSINT assessment is combined with non-public data to create a more comprehensive threat intelligence report. Frequent updates to OSINT cybersecurity assessments can help organizations mitigate the risk of data breaches, ransomware, malware and other cyberattacks.
+            </p>
+
+            <h2>OSINT Tools</h2>
+            <p>
+                Because of the vast amount of public information available, it is often impractical to manually collect, sort and analyze OSINT data. Specialized open-source intelligence tools can help manage and automate data tasks for a variety of OSINT use cases.
+                <ul>
+                    <li><strong>Osintframework.com:</strong> An extensive directory of free, online OSINT tools and resources hosted on the developer platform GitHub. Both hackers and cybersecurity professionals can use this directory as a starting point to drill down into the specific functionality they seek in an OSINT tool.</li>
+                    <li><strong>Maltego:</strong> A real-time data mining solution for Windows, Mac and Linux platforms that provides graphic representations of data patterns and connections. With its ability to profile and track the online activities of individuals, this tool can be useful to both cybersecurity professionals and threat actors.</li>
+                    <li><strong>Spiderfoot:</strong> A data source integration tool for information such as email addresses, phone numbers, IP addresses, subdomains and more. Ethical hackers may use this resource to investigate publicly available information that could pose a threat to an organization or an individual.</li>
+                    <li><strong>Shodan:</strong> A search engine for internet-connected devices that can also provide information on metadata and open ports. Because this tool can identify security vulnerabilities for millions of devices, it can be useful to both cybersecurity professionals and cybercriminals.</li>
+                    <li><strong>Babel X:</strong> A multilingual, AI-enabled search tool capable of searching the world wide web and dark web in more than 200 languages. Security teams within an organization may use this tool to search for sensitive or proprietary information that may be posted on the dark web or in a foreign country.</li>
+                    <li><strong>Metasploit:</strong> A penetration testing tool that can identify security vulnerabilities in networks, systems and applications. Both cybersecurity professionals and hackers find value in this tool because it can expose the specific weaknesses that may enable a successful cyberattack.</li>
+                </ul>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
